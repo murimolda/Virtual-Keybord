@@ -602,19 +602,19 @@ document.addEventListener("DOMContentLoaded", function () {
             text = `${event.target.nextSibling.textContent}`;
             if(elem.selectionStart !== elem.value.length){
               cursorPlace = elem.value.indexOf(elem.value[elem.selectionStart]);
-              elem.value = `${elem.value.substr(0, cursorPlace)}${event.target.nextSibling.textContent.toLocaleLowerCase()}${elem.value.substr(cursorPlace, elem.value.length)}`;
+              elem.value = `${elem.value.substr(0, cursorPlace)}${event.target.nextSibling.textContent.toLocaleUpperCase()}${elem.value.substr(cursorPlace, elem.value.length)}`;
               elem.selectionStart = elem.selectionEnd = cursorPlace + 1;
             }else{
-              elem.value = `${elem.value}${event.target.nextSibling.textContent.toLocaleLowerCase()}`;
+              elem.value = `${elem.value}${event.target.nextSibling.textContent.toLocaleUpperCase()}`;
             }
           } else {
             text = `${event.target.lastChild.textContent}`;
             if(elem.selectionStart !== elem.value.length){
               cursorPlace = elem.value.indexOf(elem.value[elem.selectionStart]);
-              elem.value = `${elem.value.substr(0, cursorPlace)}${event.target.textContent.toLocaleLowerCase()}${elem.value.substr(cursorPlace, elem.value.length)}`;
+              elem.value = `${elem.value.substr(0, cursorPlace)}${event.target.textContent.toLocaleUpperCase()}${elem.value.substr(cursorPlace, elem.value.length)}`;
               elem.selectionStart = elem.selectionEnd = cursorPlace + 1;
             }else{
-              elem.value = `${elem.value}${event.target.lastChild.textContent.toLocaleLowerCase()}`;
+              elem.value = `${elem.value}${event.target.lastChild.textContent.toLocaleUpperCase()}`;
             }
           }
         } else if (
@@ -623,22 +623,21 @@ document.addEventListener("DOMContentLoaded", function () {
         ) {
           if (event.target.className === "shift-down") {
             text = `${event.target.previousSibling.textContent}`;
-            elem.value = `${elem.value}${event.target.previousSibling.textContent.toLocaleUpperCase()}`;
             if(elem.selectionStart !== elem.value.length){
               cursorPlace = elem.value.indexOf(elem.value[elem.selectionStart]);
-              elem.value = `${elem.value.substr(0, cursorPlace)}${event.target.previousSibling.textContent.toLocaleLowerCase()}${elem.value.substr(cursorPlace, elem.value.length)}`;
+              elem.value = `${elem.value.substr(0, cursorPlace)}${event.target.previousSibling.textContent.toLocaleUpperCase()}${elem.value.substr(cursorPlace, elem.value.length)}`;
               elem.selectionStart = elem.selectionEnd = cursorPlace + 1;
             }else{
-              elem.value = `${elem.value}${event.target.previousSibling.lastChild.textContent.toLocaleLowerCase()}`;
+              elem.value = `${elem.value}${event.target.previousSibling.lastChild.textContent.toLocaleUpperCase()}`;
             }
           } else {
             text = `${event.target.lastChild.textContent}`;
             if(elem.selectionStart !== elem.value.length){
               cursorPlace = elem.value.indexOf(elem.value[elem.selectionStart]);
-              elem.value = `${elem.value.substr(0, cursorPlace)}${event.target.textContent.toLocaleLowerCase()}${elem.value.substr(cursorPlace, elem.value.length)}`;
+              elem.value = `${elem.value.substr(0, cursorPlace)}${event.target.textContent.toLocaleUpperCase()}${elem.value.substr(cursorPlace, elem.value.length)}`;
               elem.selectionStart = elem.selectionEnd = cursorPlace + 1;
             }else{
-              elem.value = `${elem.value}${event.target.lastChild.textContent.toLocaleLowerCase()}`;
+              elem.value = `${elem.value}${event.target.lastChild.textContent.toLocaleUpperCase()}`;
             }
           }
         }
