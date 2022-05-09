@@ -502,7 +502,7 @@ document.addEventListener("DOMContentLoaded", function () {
       changeLang();
       changeKeyValue();
     },
-    "ShiftLeft",
+    "ControlLeft",
     "AltLeft"
   );
 
@@ -696,8 +696,19 @@ document.addEventListener("DOMContentLoaded", function () {
           }else{
             elem.value = `${elem.value}    `;
           }
-        }
+      } else if (
+        event.target.hasAttribute("data-code") &&
+        event.target.dataset.code === "ArrowLeft") {
+          elem.selectionStart = elem.selectionEnd = elem.selectionEnd-1;
+          elem.selectionStart = elem.selectionEnd;
+      } else if (
+        event.target.hasAttribute("data-code") &&
+        event.target.dataset.code === "ArrowRight") {
+          elem.selectionStart = elem.selectionEnd = elem.selectionEnd+1;
+          elem.selectionStart = elem.selectionEnd;
+          }
       elem.focus();
+      console.log(elem.selectionStart);
     });
     document.addEventListener("keyup", function () {
       elem.append(elem.value.slice(-1));
