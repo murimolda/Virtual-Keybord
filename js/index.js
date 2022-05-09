@@ -685,6 +685,16 @@ document.addEventListener("DOMContentLoaded", function () {
           }else{
             elem.value = `${elem.value}\n`;
           }
+      } else if (
+        event.target.hasAttribute("data-code") &&
+        event.target.dataset.code === "Tab") {
+          if (elem.selectionStart !== elem.value.length) {
+            cursorPlace = elem.value.indexOf(elem.value[elem.selectionStart]);
+            elem.value = `${elem.value.substr(0, cursorPlace)}    ${elem.value.substr(cursorPlace, elem.value.length)}`;
+            elem.selectionStart = elem.selectionEnd = cursorPlace+4;
+          }else{
+            elem.value = `${elem.value}    `;
+          }
         }
       elem.focus();
     });
