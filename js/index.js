@@ -1,5 +1,5 @@
-document.addEventListener("DOMContentLoaded", function () {
-  /*Function to find the element that is wider than the body of the page*/
+document.addEventListener('DOMContentLoaded', function () {
+  /*Function to find the element that is wider than the body of the page */
   const docWidth = document.documentElement.offsetWidth;
 
   [].forEach.call(document.querySelectorAll("*"), function (el) {
