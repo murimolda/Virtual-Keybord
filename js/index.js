@@ -1,5 +1,5 @@
-document.addEventListener('DOMContentLoaded', function () {
-  /*Function to find the element that is wider than the body of the page */
+document.addEventListener("DOMContentLoaded", function () {
+  /*Function to find the element that is wider than the body of the page*/
   const docWidth = document.documentElement.offsetWidth;
 
   [].forEach.call(document.querySelectorAll("*"), function (el) {
@@ -376,11 +376,16 @@ document.addEventListener('DOMContentLoaded', function () {
   const createElements = () => {
     let container = document.createElement("div");
     container.classList.add("container");
+    let keyBoardText = document.createElement("p");
+    keyBoardText.classList.add("keyboard-text");
+    keyBoardText.textContent = 'To switch language combination: left CTRL + ALT'
+
 
     container.append(
       titleBlock.createTitleBlock(),
       textAreaBlock.createWrap(),
-      keyBoardBlock.createKeyWrap()
+      keyBoardBlock.createKeyWrap(),
+      keyBoardText
     );
     body.append(container);
   };
@@ -575,26 +580,42 @@ document.addEventListener('DOMContentLoaded', function () {
         ) {
           if (event.target.className === "shift-up") {
             text = `${event.target.nextSibling.textContent}`;
-            elem.value = `${
-              elem.value
-            }${event.target.nextSibling.textContent.toLocaleLowerCase()}`;
+            if(elem.selectionStart !== elem.value.length){
+              cursorPlace = elem.value.indexOf(elem.value[elem.selectionStart]);
+              elem.value = `${elem.value.substr(0, cursorPlace)}${event.target.nextSibling.textContent.toLocaleLowerCase()}${elem.value.substr(cursorPlace, elem.value.length)}`;
+              elem.selectionStart = elem.selectionEnd = cursorPlace + 1;
+            }else{
+              elem.value = `${elem.value}${event.target.nextSibling.textContent.toLocaleLowerCase()}`;
+            }
           } else {
             text = `${event.target.lastChild.textContent}`;
-            elem.value = `${
-              elem.value
-            }${event.target.lastChild.textContent.toLocaleLowerCase()}`;
+            if(elem.selectionStart !== elem.value.length){
+              cursorPlace = elem.value.indexOf(elem.value[elem.selectionStart]);
+              elem.value = `${elem.value.substr(0, cursorPlace)}${event.target.textContent.toLocaleLowerCase()}${elem.value.substr(cursorPlace, elem.value.length)}`;
+              elem.selectionStart = elem.selectionEnd = cursorPlace + 1;
+            }else{
+              elem.value = `${elem.value}${event.target.lastChild.textContent.toLocaleLowerCase()}`;
+            }
           }
         } else if (capsLock.classList.contains("key-active")) {
           if (event.target.className === "shift-up") {
             text = `${event.target.nextSibling.textContent}`;
-            elem.value = `${
-              elem.value
-            }${event.target.nextSibling.textContent.toLocaleUpperCase()}`;
+            if(elem.selectionStart !== elem.value.length){
+              cursorPlace = elem.value.indexOf(elem.value[elem.selectionStart]);
+              elem.value = `${elem.value.substr(0, cursorPlace)}${event.target.nextSibling.textContent.toLocaleLowerCase()}${elem.value.substr(cursorPlace, elem.value.length)}`;
+              elem.selectionStart = elem.selectionEnd = cursorPlace + 1;
+            }else{
+              elem.value = `${elem.value}${event.target.nextSibling.textContent.toLocaleLowerCase()}`;
+            }
           } else {
             text = `${event.target.lastChild.textContent}`;
-            elem.value = `${
-              elem.value
-            }${event.target.lastChild.textContent.toLocaleUpperCase()}`;
+            if(elem.selectionStart !== elem.value.length){
+              cursorPlace = elem.value.indexOf(elem.value[elem.selectionStart]);
+              elem.value = `${elem.value.substr(0, cursorPlace)}${event.target.textContent.toLocaleLowerCase()}${elem.value.substr(cursorPlace, elem.value.length)}`;
+              elem.selectionStart = elem.selectionEnd = cursorPlace + 1;
+            }else{
+              elem.value = `${elem.value}${event.target.lastChild.textContent.toLocaleLowerCase()}`;
+            }
           }
         } else if (
           shiftLeft.classList.contains("key-active") ||
@@ -602,14 +623,23 @@ document.addEventListener('DOMContentLoaded', function () {
         ) {
           if (event.target.className === "shift-down") {
             text = `${event.target.previousSibling.textContent}`;
-            elem.value = `${
-              elem.value
-            }${event.target.previousSibling.textContent.toLocaleUpperCase()}`;
+            elem.value = `${elem.value}${event.target.previousSibling.textContent.toLocaleUpperCase()}`;
+            if(elem.selectionStart !== elem.value.length){
+              cursorPlace = elem.value.indexOf(elem.value[elem.selectionStart]);
+              elem.value = `${elem.value.substr(0, cursorPlace)}${event.target.previousSibling.textContent.toLocaleLowerCase()}${elem.value.substr(cursorPlace, elem.value.length)}`;
+              elem.selectionStart = elem.selectionEnd = cursorPlace + 1;
+            }else{
+              elem.value = `${elem.value}${event.target.previousSibling.lastChild.textContent.toLocaleLowerCase()}`;
+            }
           } else {
             text = `${event.target.lastChild.textContent}`;
-            elem.value = `${
-              elem.value
-            }${event.target.firstChild.textContent.toLocaleUpperCase()}`;
+            if(elem.selectionStart !== elem.value.length){
+              cursorPlace = elem.value.indexOf(elem.value[elem.selectionStart]);
+              elem.value = `${elem.value.substr(0, cursorPlace)}${event.target.textContent.toLocaleLowerCase()}${elem.value.substr(cursorPlace, elem.value.length)}`;
+              elem.selectionStart = elem.selectionEnd = cursorPlace + 1;
+            }else{
+              elem.value = `${elem.value}${event.target.lastChild.textContent.toLocaleLowerCase()}`;
+            }
           }
         }
         elem.append(text);
@@ -617,15 +647,17 @@ document.addEventListener('DOMContentLoaded', function () {
         event.target.hasAttribute("data-code") &&
         event.target.dataset.code === "Backspace"
       ) {
-        if (elem.selectionStart !== elem.value.length) {
+        if (elem.selectionStart !== elem.value.length && elem.selectionStart === elem.selectionEnd) {
           cursorPlace = elem.value.indexOf(elem.value[elem.selectionStart]);
           elem.lastChild.remove(elem.value[elem.selectionStart - 1]);
-          elem.value = `${elem.value.replace(
-            elem.value[elem.selectionStart - 1],
-            ""
-          )}`;
+          elem.value = `${elem.value.replace(elem.value[elem.selectionStart - 1],"")}`;
           elem.selectionStart = elem.selectionEnd = cursorPlace - 1;
-        } else {
+        }else if(elem.selectionStart !== elem.value.length && elem.selectionStart !== elem.selectionEnd){
+          cursorPlace = elem.value.indexOf(elem.value[elem.selectionStart]);
+          elem.value = `${elem.value.substr(0, cursorPlace)}${elem.value.substr(elem.value.indexOf(elem.value[elem.selectionEnd]), elem.value.length)}`;
+          elem.selectionStart = elem.selectionEnd = cursorPlace;
+
+        }else {
           elem.lastChild.remove(value.slice(-1));
           elem.value = `${elem.value.substring(0, elem.value.length - 1)}`;
         }
@@ -633,17 +665,28 @@ document.addEventListener('DOMContentLoaded', function () {
         event.target.hasAttribute("data-code") &&
         event.target.dataset.code === "Delete"
       ) {
-        if (elem.selectionStart !== elem.value.length) {
+        if (elem.selectionStart !== elem.value.length && elem.selectionStart === elem.selectionEnd) {
           cursorPlace = elem.value.indexOf(elem.value[elem.selectionStart]);
           elem.lastChild.remove(elem.value[elem.selectionStart]);
-          elem.value = `${elem.value.replace(
-            elem.value[elem.selectionStart],
-            ""
-          )}`;
-          elem.selectionStart = elem.selectionStart;
+          elem.value = `${elem.value.replace(elem.value[elem.selectionStart], "")}`;
+          elem.selectionStart = elem.selectionEnd = cursorPlace;
+        }else if(elem.selectionStart !== elem.value.length && elem.selectionStart !== elem.selectionEnd){
+          cursorPlace = elem.value.indexOf(elem.value[elem.selectionStart]);
+          elem.lastChild.remove(elem.value[elem.selectionStart - 1]);
+          elem.value = `${elem.value.substr(0, cursorPlace)}${elem.value.substr(elem.value.indexOf(elem.value[elem.selectionEnd]), elem.value.length)}`;
           elem.selectionStart = elem.selectionEnd = cursorPlace;
         }
-      }
+      } else if (
+        event.target.hasAttribute("data-code") &&
+        event.target.dataset.code === "Enter") {
+          if (elem.selectionStart !== elem.value.length) {
+            cursorPlace = elem.value.indexOf(elem.value[elem.selectionStart]);
+            elem.value = `${elem.value.substr(0, cursorPlace)}\n${elem.value.substr(cursorPlace, elem.value.length)}`;
+            elem.selectionStart = elem.selectionEnd = cursorPlace + 1;
+          }else{
+            elem.value = `${elem.value}\n`;
+          }
+        }
       elem.focus();
     });
     document.addEventListener("keyup", function () {
