@@ -591,7 +591,7 @@ document.addEventListener("DOMContentLoaded", function () {
             text = `${event.target.lastChild.textContent}`;
             if(elem.selectionStart !== elem.value.length){
               cursorPlace = elem.value.indexOf(elem.value[elem.selectionStart]);
-              elem.value = `${elem.value.substr(0, cursorPlace)}${event.target.textContent.toLocaleLowerCase()}${elem.value.substr(cursorPlace, elem.value.length)}`;
+              elem.value = `${elem.value.substr(0, cursorPlace)}${event.target.lastChild.textContent.toLocaleLowerCase()}${elem.value.substr(cursorPlace, elem.value.length)}`;
               elem.selectionStart = elem.selectionEnd = cursorPlace + 1;
             }else{
               elem.value = `${elem.value}${event.target.lastChild.textContent.toLocaleLowerCase()}`;
@@ -611,7 +611,7 @@ document.addEventListener("DOMContentLoaded", function () {
             text = `${event.target.lastChild.textContent}`;
             if(elem.selectionStart !== elem.value.length){
               cursorPlace = elem.value.indexOf(elem.value[elem.selectionStart]);
-              elem.value = `${elem.value.substr(0, cursorPlace)}${event.target.textContent.toLocaleUpperCase()}${elem.value.substr(cursorPlace, elem.value.length)}`;
+              elem.value = `${elem.value.substr(0, cursorPlace)}${event.target.lastChild.textContent.toLocaleUpperCase()}${elem.value.substr(cursorPlace, elem.value.length)}`;
               elem.selectionStart = elem.selectionEnd = cursorPlace + 1;
             }else{
               elem.value = `${elem.value}${event.target.lastChild.textContent.toLocaleUpperCase()}`;
@@ -621,6 +621,7 @@ document.addEventListener("DOMContentLoaded", function () {
           shiftLeft.classList.contains("key-active") ||
           shiftRight.classList.contains("key-active")
         ) {
+          console.log(event.target);
           if (event.target.className === "shift-down") {
             text = `${event.target.previousSibling.textContent}`;
             if(elem.selectionStart !== elem.value.length){
@@ -628,16 +629,16 @@ document.addEventListener("DOMContentLoaded", function () {
               elem.value = `${elem.value.substr(0, cursorPlace)}${event.target.previousSibling.textContent.toLocaleUpperCase()}${elem.value.substr(cursorPlace, elem.value.length)}`;
               elem.selectionStart = elem.selectionEnd = cursorPlace + 1;
             }else{
-              elem.value = `${elem.value}${event.target.previousSibling.lastChild.textContent.toLocaleUpperCase()}`;
+              elem.value = `${elem.value}${event.target.previousSibling.textContent.toLocaleUpperCase()}`;
             }
           } else {
-            text = `${event.target.lastChild.textContent}`;
+            text = `${event.target.firstChild.textContent}`;
             if(elem.selectionStart !== elem.value.length){
               cursorPlace = elem.value.indexOf(elem.value[elem.selectionStart]);
-              elem.value = `${elem.value.substr(0, cursorPlace)}${event.target.textContent.toLocaleUpperCase()}${elem.value.substr(cursorPlace, elem.value.length)}`;
+              elem.value = `${elem.value.substr(0, cursorPlace)}${event.target.firstChild.textContent.toLocaleUpperCase()}${elem.value.substr(cursorPlace, elem.value.length)}`;
               elem.selectionStart = elem.selectionEnd = cursorPlace + 1;
             }else{
-              elem.value = `${elem.value}${event.target.lastChild.textContent.toLocaleUpperCase()}`;
+              elem.value = `${elem.value}${event.target.firstChild.textContent.toLocaleUpperCase()}`;
             }
           }
         }
@@ -684,6 +685,16 @@ document.addEventListener("DOMContentLoaded", function () {
             elem.selectionStart = elem.selectionEnd = cursorPlace + 1;
           }else{
             elem.value = `${elem.value}\n`;
+          }
+      } else if (
+        event.target.hasAttribute("data-code") &&
+        event.target.dataset.code === "Tab") {
+          if (elem.selectionStart !== elem.value.length) {
+            cursorPlace = elem.value.indexOf(elem.value[elem.selectionStart]);
+            elem.value = `${elem.value.substr(0, cursorPlace)}    ${elem.value.substr(cursorPlace, elem.value.length)}`;
+            elem.selectionStart = elem.selectionEnd = cursorPlace+4;
+          }else{
+            elem.value = `${elem.value}    `;
           }
         }
       elem.focus();
