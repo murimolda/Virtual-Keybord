@@ -502,7 +502,7 @@ document.addEventListener("DOMContentLoaded", function () {
       changeLang();
       changeKeyValue();
     },
-    "ShiftLeft",
+    "ControlLeft",
     "AltLeft"
   );
 
