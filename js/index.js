@@ -1,12 +1,12 @@
 document.addEventListener('DOMContentLoaded', () => {
   /* Function to find the element that is wider than the body of the page */
-  const docWidth = document.documentElement.offsetWidth;
+  // const docWidth = document.documentElement.offsetWidth;
 
-  [].forEach.call(document.querySelectorAll('*'), (el) => {
-    if (el.offsetWidth > docWidth) {
-      console.log(el);
-    }
-  });
+  // [].forEach.call(document.querySelectorAll('*'), (el) => {
+  //   if (el.offsetWidth > docWidth) {
+  //     console.log(el);
+  //   }
+  // });
 
   const body = document.querySelector('body');
   let language = 'en';
@@ -474,7 +474,6 @@ document.addEventListener('DOMContentLoaded', () => {
       const keyBoardItems = document.querySelectorAll('[data-code]');
       if (keyButtonText.includes(event.code)) {
         event.preventDefault();
-        console.log('+');
         keyBoardItems.forEach((keyItem) => {
           if (keyItem.dataset.code === event.code || keyItem.parentNode.dataset.code === event.code) {
             if (
@@ -491,7 +490,6 @@ document.addEventListener('DOMContentLoaded', () => {
                 elem.value = `${elem.value}${keyItem.lastChild.textContent.toLocaleLowerCase()}`;
               }
             } else if (capsLock.classList.contains('key-active')) {
-              console.log(keyItem);
               text = `${keyItem.lastChild.textContent}`;
               if (elem.selectionStart !== elem.value.length) {
                 cursorPlace = elem.value.indexOf(elem.value[elem.selectionStart]);
