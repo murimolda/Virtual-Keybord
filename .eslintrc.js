@@ -30,5 +30,6 @@ module.exports = {
     'guard-for-in': 'off',
     'no-console': 'off',
     'prefer-const': 'off',
+    'max-len': 'off',
   },
 };
