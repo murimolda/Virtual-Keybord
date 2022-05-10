@@ -467,8 +467,56 @@ document.addEventListener('DOMContentLoaded', () => {
       }
       elem.focus();
     });
-    document.addEventListener('keyup', () => {
-      elem.append(elem.value.slice(-1));
+    document.addEventListener('keydown', (event) => {
+      const shiftLeft = document.querySelector('[data-code="ShiftLeft"]');
+      const shiftRight = document.querySelector('[data-code="ShiftRight"]');
+      const capsLock = document.querySelector('[data-code="CapsLock"]');
+      const keyBoardItems = document.querySelectorAll('[data-code]');
+      if (keyButtonText.includes(event.code)) {
+        event.preventDefault();
+        console.log('+');
+        keyBoardItems.forEach((keyItem) => {
+          if (keyItem.dataset.code === event.code || keyItem.parentNode.dataset.code === event.code) {
+            if (
+              !capsLock.classList.contains('key-active')
+                && !shiftLeft.classList.contains('key-active')
+                && !shiftRight.classList.contains('key-active')
+            ) {
+              text = `${keyItem.lastChild.textContent}`;
+              if (elem.selectionStart !== elem.value.length) {
+                cursorPlace = elem.value.indexOf(elem.value[elem.selectionStart]);
+                elem.value = `${elem.value.substr(0, cursorPlace)}${keyItem.lastChild.textContent.toLocaleLowerCase()}${elem.value.substr(cursorPlace, elem.value.length)}`;
+                elem.selectionStart = elem.selectionEnd = cursorPlace + 1;
+              } else {
+                elem.value = `${elem.value}${keyItem.lastChild.textContent.toLocaleLowerCase()}`;
+              }
+            } else if (capsLock.classList.contains('key-active')) {
+              console.log(keyItem);
+              text = `${keyItem.lastChild.textContent}`;
+              if (elem.selectionStart !== elem.value.length) {
+                cursorPlace = elem.value.indexOf(elem.value[elem.selectionStart]);
+                elem.value = `${elem.value.substr(0, cursorPlace)}${keyItem.lastChild.textContent.toLocaleUpperCase()}${elem.value.substr(cursorPlace, elem.value.length)}`;
+                elem.selectionStart = elem.selectionEnd = cursorPlace + 1;
+              } else {
+                elem.value = `${elem.value}${keyItem.lastChild.textContent.toLocaleUpperCase()}`;
+              }
+            } else if (
+              shiftLeft.classList.contains('key-active')
+                || shiftRight.classList.contains('key-active')
+            ) {
+              text = `${keyItem.firstChild.textContent}`;
+              if (elem.selectionStart !== elem.value.length) {
+                cursorPlace = elem.value.indexOf(elem.value[elem.selectionStart]);
+                elem.value = `${elem.value.substr(0, cursorPlace)}${keyItem.firstChild.textContent.toLocaleUpperCase()}${elem.value.substr(cursorPlace, elem.value.length)}`;
+                elem.selectionStart = elem.selectionEnd = cursorPlace + 1;
+              } else {
+                elem.value = `${elem.value}${keyItem.firstChild.textContent.toLocaleUpperCase()}`;
+              }
+            }
+          }
+        });
+        elem.append(text);
+      }
     });
   };
 
