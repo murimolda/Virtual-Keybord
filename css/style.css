@@ -1,0 +1,335 @@
+@charset "UTF-8";
+/*FONTS CONNECTING */
+
+/*Arial*/
+
+@font-face {
+  font-family: "Arial";
+  src: url("ArialMT.eot");
+  src: local("Arial"), local("ArialMT"),
+    url("ArialMT.eot?#iefix") format("embedded-opentype"),
+    url("ArialMT.woff") format("woff"), url("ArialMT.ttf") format("truetype");
+  font-weight: normal;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: "Arial";
+  src: url("Arial-BoldMT.eot");
+  src: local("Arial Bold"), local("Arial-BoldMT"),
+    url("Arial-BoldMT.eot?#iefix") format("embedded-opentype"),
+    url("Arial-BoldMT.woff") format("woff"),
+    url("Arial-BoldMT.ttf") format("truetype");
+  font-weight: bold;
+  font-style: normal;
+}
+/*Roboto Mono*/
+
+@font-face {
+  font-family: "Roboto Mono";
+  src: url("../assets/fonts/Roboto_Mono/RobotoMono-Regular.ttf")
+    format("truetype");
+  font-weight: 400;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: "Roboto Mono";
+  src: url("../assets/fonts/Roboto_Mono/RobotoMono-Bold.ttf") format("truetype");
+  font-weight: 700;
+  font-style: normal;
+}
+
+/*Variables*/
+
+:root {
+  --main-bg: #ffffff;
+  --keyboard-wrapper-bg: linear-gradient(180deg, #c4c4c4 0%, #727272 100%);
+  --button-bg: #131313;
+  --button-shadow: inset -7px -9px 30px rgba(63, 63, 63, 0.88);
+  --active-button-bg: #1782ff;
+  --active-button-border: rgba(255, 255, 255, 0.25);
+
+  --main-color: #ffffff;
+  --title-color: #131313;
+
+  --main-font-size: 20px;
+  --font-family: "Arial", sans-serif;
+  --textarea-font-family: "Roboto Mono", monospace;
+}
+
+/* Function to find the element that is wider than the body of the page*/
+/* * {
+  outline: solid 1px red;
+} */
+
+*,
+*:before,
+*:after {
+  box-sizing: border-box;
+}
+
+*:focus,
+*:active {
+  outline: none;
+}
+
+a:focus,
+*:active {
+  outline: none;
+}
+
+aside,
+nav,
+footer,
+header,
+section {
+  display: block;
+}
+
+html {
+  /*плавная прокрутка по якорям*/
+  scroll-behavior: smooth;
+}
+
+html,
+body {
+  height: 100%;
+}
+
+body {
+  line-height: 1;
+  margin: 0 auto;
+}
+
+button {
+  cursor: pointer;
+  padding: 0;
+  font-family: inherit;
+}
+
+img {
+  vertical-align: top;
+}
+
+input,
+textarea {
+  font-family: inherit;
+  padding: 0;
+}
+
+input:-internal-autofill-selected {
+  background-color: inherit;
+  color: inherit;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  font-style: normal;
+  font-weight: normal;
+  margin-top: 0;
+  margin-block-start: 0;
+  margin-block-end: 0;
+}
+
+ul {
+  padding-inline-start: 0;
+  margin-block-start: 0;
+  margin-block-end: 0;
+}
+
+ul li {
+  padding: 0;
+  list-style: none;
+}
+
+a {
+  text-decoration: none;
+}
+
+a:hover,
+a:visited {
+  text-decoration: none;
+}
+
+p {
+  margin-block-start: 0;
+  margin-block-end: 0;
+}
+
+/*ОСНОВНАЯ СЕТКА*/
+
+body {
+  background: var(--main-bg);
+  font-family: var(--font-family);
+  font-size: var(--main-font-size);
+  color: var(--main-color);
+  font-weight: 400;
+  font-style: normal;
+  width: 100%;
+}
+
+.container {
+  margin: 0 auto;
+  padding: 30px 10px;
+  width: 1280px;
+  text-align: center;
+}
+
+.title {
+  font-size: 1.7em;
+  color: var(--title-color);
+}
+
+.textarea-block {
+  min-height: 100px;
+  border: 2px solid var(--button-bg);
+  border-radius: 15px;
+  width: 100%;
+  padding: 20px;
+  font-size: var(--main-font-size);
+  margin: 30px 0;
+  font-family: var(--textarea-font-family);
+}
+
+.keyboard-wrapper {
+  background: var(--keyboard-wrapper-bg);
+  border-radius: 35px;
+  padding: 30px;
+}
+
+.keyboard-line {
+  display: grid;
+  justify-content: space-between;
+}
+
+.keyboard-line:not(:last-child) {
+  margin-bottom: 10px;
+}
+
+.keyboard-line:nth-child(1) {
+  grid-template-columns: repeat(14, 1fr);
+  column-gap: 10px;
+}
+.keyboard-line:nth-child(2) {
+  grid-template-columns: repeat(14, 1fr);
+  column-gap: 10px;
+}
+.keyboard-line:nth-child(3) {
+  grid-template-columns: repeat(14, 1fr);
+  column-gap: 10px;
+}
+.keyboard-line:nth-child(4) {
+  grid-template-columns: repeat(13, 1fr);
+  column-gap: 10px;
+}
+.keyboard-line:nth-child(5) {
+  grid-template-columns: repeat(13, 1fr);
+  column-gap: 10px;
+}
+.keyboard-line:nth-child(6) {
+  grid-template-columns: repeat(9, 1fr);
+  column-gap: 10px;
+}
+
+.keyboard-item {
+  position: relative;
+  background: var(--button-bg);
+  box-shadow: var(--button-shadow);
+  width: 70px;
+  height: 70px;
+  border-radius: 15px;
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  row-gap: 0.4em;
+  outline: none;
+  cursor: pointer;
+  transition: all 150ms ease-in-out;
+}
+
+.key-active {
+  background: var(--active-button-bg);
+  border: var(--active-button-border);
+  box-shadow: 0 0 4px 0 rgba(63, 63, 63, 0.88) inset, 0 0 4px 2px rgba(63, 63, 63, 0.88);
+}
+
+.keyboard-line:nth-child(1) > .keyboard-item:last-child {
+  width: 100px;
+}
+
+.keyboard-line:nth-child(2) > .keyboard-item:last-child {
+  width: 140px;
+}
+
+.keyboard-line:nth-child(3) > .keyboard-item:first-child {
+  width: 100px;
+}
+
+.keyboard-line:nth-child(4) > .keyboard-item:first-child {
+  width: 100px;
+  font-size: 0.8em;
+}
+
+.keyboard-line:nth-child(4) > .keyboard-item:last-child {
+  width: 140px;
+}
+
+.keyboard-line:nth-child(5) > .keyboard-item:first-child {
+  width: 120px;
+}
+
+.keyboard-line:nth-child(5) > .keyboard-item:nth-last-child(2) {
+  width: 50px;
+  margin: 0 auto;
+}
+
+.keyboard-line:nth-child(5) > .keyboard-item:last-child {
+  width: 120px;
+}
+
+.keyboard-line:nth-child(6) > .keyboard-item:first-child {
+  width: 100px;
+}
+
+.keyboard-line:nth-child(6) > .keyboard-item:nth-child(2) {
+  width: 100px;
+}
+
+.keyboard-line:nth-child(6) > .keyboard-item:nth-child(3) {
+  width: 450px;
+}
+
+.keyboard-line:nth-child(6) > .keyboard-item:nth-child(4) {
+  width: 100px;
+}
+
+.keyboard-line:nth-child(6) > .keyboard-item:nth-child(5) {
+  width: 100px;
+  margin-right: auto;
+}
+
+.keyboard-line:nth-child(6) > .keyboard-item:nth-last-child(1) {
+  height: 50px;
+  margin-top: 10px;
+}
+
+.keyboard-line:nth-child(6) > .keyboard-item:nth-last-child(2) {
+  width: 50px;
+}
+
+.keyboard-line:nth-child(6) > .keyboard-item:nth-last-child(3) {
+  height: 50px;
+  margin-top: 10px;
+  margin-left: 26px;
+}
+
+.keyboard-text{
+  margin-top: 40px;
+  color: var(--button-bg);
+  font-size: 1.5em;
+}
