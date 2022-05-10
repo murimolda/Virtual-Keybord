@@ -1,5 +1,5 @@
 document.addEventListener('DOMContentLoaded', () => {
-/* Function to find the element that is wider than the body of the page */
+  /* Function to find the element that is wider than the body of the page */
   const docWidth = document.documentElement.offsetWidth;
 
   [].forEach.call(document.querySelectorAll('*'), (el) => {
@@ -324,7 +324,7 @@ document.addEventListener('DOMContentLoaded', () => {
   ];
 
   const writeText = (elem) => {
-    const value = elem.value;
+    let value = elem.value;
     let text = '';
     let cursorPlace;
 
@@ -334,14 +334,14 @@ document.addEventListener('DOMContentLoaded', () => {
       const capsLock = document.querySelector('[data-code="CapsLock"]');
       if (
         (event.target.hasAttribute('data-code')
-          && keyButtonText.includes(event.target.dataset.code))
-        || (event.target.parentNode.hasAttribute('data-code')
-          && keyButtonText.includes(event.target.parentNode.dataset.code))
+            && keyButtonText.includes(event.target.dataset.code))
+          || (event.target.parentNode.hasAttribute('data-code')
+            && keyButtonText.includes(event.target.parentNode.dataset.code))
       ) {
         if (
           !capsLock.classList.contains('key-active')
-          && !shiftLeft.classList.contains('key-active')
-          && !shiftRight.classList.contains('key-active')
+            && !shiftLeft.classList.contains('key-active')
+            && !shiftRight.classList.contains('key-active')
         ) {
           if (event.target.className === 'shift-up') {
             text = `${event.target.nextSibling.textContent}`;
@@ -384,7 +384,7 @@ document.addEventListener('DOMContentLoaded', () => {
           }
         } else if (
           shiftLeft.classList.contains('key-active')
-          || shiftRight.classList.contains('key-active')
+            || shiftRight.classList.contains('key-active')
         ) {
           if (event.target.className === 'shift-down') {
             text = `${event.target.previousSibling.textContent}`;
@@ -409,7 +409,7 @@ document.addEventListener('DOMContentLoaded', () => {
         elem.append(text);
       } else if (
         event.target.hasAttribute('data-code')
-        && event.target.dataset.code === 'Backspace'
+          && event.target.dataset.code === 'Backspace'
       ) {
         if (elem.selectionStart !== elem.value.length && elem.selectionStart === elem.selectionEnd) {
           cursorPlace = elem.value.indexOf(elem.value[elem.selectionStart]);
@@ -426,7 +426,7 @@ document.addEventListener('DOMContentLoaded', () => {
         }
       } else if (
         event.target.hasAttribute('data-code')
-        && event.target.dataset.code === 'Delete'
+          && event.target.dataset.code === 'Delete'
       ) {
         if (elem.selectionStart !== elem.value.length && elem.selectionStart === elem.selectionEnd) {
           cursorPlace = elem.value.indexOf(elem.value[elem.selectionStart]);
@@ -441,7 +441,7 @@ document.addEventListener('DOMContentLoaded', () => {
         }
       } else if (
         event.target.hasAttribute('data-code')
-        && event.target.dataset.code === 'Enter') {
+          && event.target.dataset.code === 'Enter') {
         if (elem.selectionStart !== elem.value.length) {
           cursorPlace = elem.value.indexOf(elem.value[elem.selectionStart]);
           elem.value = `${elem.value.substr(0, cursorPlace)}\n${elem.value.substr(cursorPlace, elem.value.length)}`;
@@ -451,22 +451,23 @@ document.addEventListener('DOMContentLoaded', () => {
         }
       } else if (
         event.target.hasAttribute('data-code')
-        && event.target.dataset.code === 'Tab') {
+          && event.target.dataset.code === 'Tab') {
         if (elem.selectionStart !== elem.value.length) {
+          text = '\t';
           cursorPlace = elem.value.indexOf(elem.value[elem.selectionStart]);
-          elem.value = `${elem.value.substr(0, cursorPlace)}    ${elem.value.substr(cursorPlace, elem.value.length)}`;
+          elem.value = `${elem.value.substr(0, cursorPlace)}\t${elem.value.substr(cursorPlace, elem.value.length)}`;
           elem.selectionStart = elem.selectionEnd = cursorPlace + 4;
         } else {
-          elem.value = `${elem.value}    `;
+          elem.value = `${elem.value}\t`;
         }
       } else if (
         event.target.hasAttribute('data-code')
-        && event.target.dataset.code === 'ArrowLeft') {
+          && event.target.dataset.code === 'ArrowLeft') {
         elem.selectionStart = elem.selectionEnd -= 1;
         elem.selectionStart = elem.selectionEnd;
       } else if (
         event.target.hasAttribute('data-code')
-        && event.target.dataset.code === 'ArrowRight') {
+          && event.target.dataset.code === 'ArrowRight') {
         elem.selectionStart = elem.selectionEnd += 1;
         elem.selectionStart = elem.selectionEnd;
       }
@@ -483,7 +484,7 @@ document.addEventListener('DOMContentLoaded', () => {
         elem.classList.add('key-active');
       } else if (
         event.code === elem.dataset.code
-        && event.code === 'CapsLock'
+          && event.code === 'CapsLock'
       ) {
         elem.classList.toggle('key-active');
       }
@@ -505,7 +506,7 @@ document.addEventListener('DOMContentLoaded', () => {
         }, 800);
       } else if (
         elem.hasAttribute('data-code')
-        && elem.dataset.code !== 'CapsLock'
+          && elem.dataset.code !== 'CapsLock'
       ) {
         elem.classList.add('key-active');
         setTimeout(() => {
@@ -513,7 +514,7 @@ document.addEventListener('DOMContentLoaded', () => {
         }, 800);
       } else if (
         elem.hasAttribute('data-code')
-        && elem.dataset.code === 'CapsLock'
+          && elem.dataset.code === 'CapsLock'
       ) {
         elem.classList.toggle('key-active');
       }
@@ -665,13 +666,13 @@ document.addEventListener('DOMContentLoaded', () => {
         if (item.dataset.code === key) {
           if (
             typeof keyCode[`${lang}`][key] === 'object'
-            && item.children.length > 0
+              && item.children.length > 0
           ) {
             item.firstChild.innerHTML = keyCode[`${lang}`][key].up;
             item.lastChild.innerHTML = keyCode[`${lang}`][key].down;
           } else if (
             typeof keyCode[`${lang}`][key] === 'object'
-            && item.children.length <= 0
+              && item.children.length <= 0
           ) {
             item.innerHTML = '';
             const shiftUp = document.createElement('span');

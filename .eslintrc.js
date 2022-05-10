@@ -29,5 +29,6 @@ module.exports = {
     'no-plusplus': 'off',
     'guard-for-in': 'off',
     'no-console': 'off',
+    'prefer-const': 'off',
   },
 };
