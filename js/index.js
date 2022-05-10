@@ -321,6 +321,10 @@ document.addEventListener('DOMContentLoaded', () => {
     'Period',
     'Slash',
     'Space',
+    'ArrowUp',
+    'ArrowLeft',
+    'ArrowRight',
+    'ArrowDown',
   ];
 
   const writeText = (elem) => {
@@ -460,16 +464,6 @@ document.addEventListener('DOMContentLoaded', () => {
         } else {
           elem.value = `${elem.value}\t`;
         }
-      } else if (
-        event.target.hasAttribute('data-code')
-          && event.target.dataset.code === 'ArrowLeft') {
-        elem.selectionStart = elem.selectionEnd -= 1;
-        elem.selectionStart = elem.selectionEnd;
-      } else if (
-        event.target.hasAttribute('data-code')
-          && event.target.dataset.code === 'ArrowRight') {
-        elem.selectionStart = elem.selectionEnd += 1;
-        elem.selectionStart = elem.selectionEnd;
       }
       elem.focus();
     });
